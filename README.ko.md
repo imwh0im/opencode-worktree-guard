@@ -32,21 +32,38 @@ README.md                # 영어 문서
 README.ko.md             # 한국어 문서
 ```
 
-## 로컬 설치
+## 설치
 
-이 저장소를 clone 하거나 복사한 뒤, opencode 설정에서 로컬 플러그인을 참조합니다.
+### 1. 플러그인 clone 및 준비
+
+```bash
+git clone https://github.com/imwh0im/opencode-worktree-guard.git
+cd opencode-worktree-guard
+npm install
+npm run build
+```
+
+### 2. opencode에 등록
+
+global opencode 설정 파일 `~/.config/opencode/opencode.json`에 plugin과 skill 경로를 추가합니다.
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["/absolute/path/to/opencode-worktree-guard/src/index.ts"],
+  "plugin": ["/absolute/path/to/opencode-worktree-guard/dist/index.js"],
   "skills": {
     "paths": ["/absolute/path/to/opencode-worktree-guard/skills"]
   }
 }
 ```
 
+`/absolute/path/to/opencode-worktree-guard`는 이 저장소를 clone한 실제 경로로 바꿔주세요.
+
+### 3. opencode 재시작
+
 설정을 바꾼 뒤에는 opencode를 재시작해야 합니다. opencode는 설정, 플러그인, 스킬을 시작 시점에 로드합니다.
+
+### 4. 선택 사항: 더 강한 AGENTS 정책 추가
 
 더 강한 프롬프트 레벨 정책을 원하면 `snippets/AGENTS.md` 내용을 global 또는 project `AGENTS.md`에 붙여넣으세요.
 

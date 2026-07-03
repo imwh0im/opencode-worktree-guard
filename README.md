@@ -32,21 +32,38 @@ README.md                # English docs
 README.ko.md             # Korean docs
 ```
 
-## Install Locally
+## Installation
 
-Clone or copy this repository, then reference the local plugin from your opencode config:
+### 1. Clone and prepare the plugin
+
+```bash
+git clone https://github.com/imwh0im/opencode-worktree-guard.git
+cd opencode-worktree-guard
+npm install
+npm run build
+```
+
+### 2. Register it in opencode
+
+Add the plugin and skill path to your global opencode config at `~/.config/opencode/opencode.json`:
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["/absolute/path/to/opencode-worktree-guard/src/index.ts"],
+  "plugin": ["/absolute/path/to/opencode-worktree-guard/dist/index.js"],
   "skills": {
     "paths": ["/absolute/path/to/opencode-worktree-guard/skills"]
   }
 }
 ```
 
+Replace `/absolute/path/to/opencode-worktree-guard` with the directory where you cloned this repository.
+
+### 3. Restart opencode
+
 Restart opencode after changing config. opencode loads config, plugins, and skills at startup.
+
+### 4. Optional: add the stronger AGENTS policy
 
 For a stronger prompt-level policy, copy `snippets/AGENTS.md` into your global or project `AGENTS.md`.
 
