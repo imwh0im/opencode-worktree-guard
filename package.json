@@ -1,22 +1,36 @@
 {
-  "name": "opencode-worktree-guard",
+  "name": "@imwh0im/opencode-worktree-guard",
   "version": "0.1.0",
   "description": "An opencode plugin and skill bundle that prompts for a git worktree before risky implementation work.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "files": [
-    "dist",
+    "dist/classifier.d.ts",
+    "dist/classifier.js",
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/state.d.ts",
+    "dist/state.js",
     "skills",
     "snippets",
     "README.md",
-    "README.ko.md"
+    "README.ko.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "npm run build && node --test dist/*.test.js",
-    "validate": "npm run typecheck && npm test"
+    "validate": "npm run typecheck && npm test",
+    "prepack": "npm run build",
+    "pack:dry-run": "npm pack --dry-run"
   },
   "keywords": [
     "opencode",
@@ -24,7 +38,18 @@
     "git",
     "worktree"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imwh0im/opencode-worktree-guard.git"
+  },
+  "homepage": "https://github.com/imwh0im/opencode-worktree-guard#readme",
+  "bugs": {
+    "url": "https://github.com/imwh0im/opencode-worktree-guard/issues"
+  },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@opencode-ai/plugin": "latest"
   },
