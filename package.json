@@ -1,0 +1,35 @@
+{
+  "name": "opencode-worktree-guard",
+  "version": "0.1.0",
+  "description": "An opencode plugin and skill bundle that prompts for a git worktree before risky implementation work.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "skills",
+    "snippets",
+    "README.md",
+    "README.ko.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --test dist/*.test.js",
+    "validate": "npm run typecheck && npm test"
+  },
+  "keywords": [
+    "opencode",
+    "plugin",
+    "git",
+    "worktree"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@opencode-ai/plugin": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest"
+  }
+}
