@@ -4,9 +4,9 @@ import { describe, it } from "node:test"
 import plugin, { addBundledSkillPath, WorktreeGuardPlugin } from "./index.js"
 
 describe("plugin export", () => {
-  it("exports the worktree guard plugin", () => {
-    assert.equal(typeof plugin, "function")
-    assert.equal(plugin, WorktreeGuardPlugin)
+  it("exports an opencode plugin module with a server plugin", () => {
+    assert.equal(typeof plugin, "object")
+    assert.equal(plugin.server, WorktreeGuardPlugin)
   })
 
   it("adds the bundled skills directory to opencode config", () => {

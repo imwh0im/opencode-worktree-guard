@@ -1,4 +1,4 @@
-import type { Plugin } from "@opencode-ai/plugin"
+import type { Plugin, PluginModule } from "@opencode-ai/plugin"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -54,4 +54,8 @@ export function addBundledSkillPath(
   }
 }
 
-export default WorktreeGuardPlugin
+const pluginModule: PluginModule = {
+  server: WorktreeGuardPlugin,
+}
+
+export default pluginModule
