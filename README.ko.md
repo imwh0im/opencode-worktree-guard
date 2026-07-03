@@ -34,7 +34,24 @@ README.ko.md             # 한국어 문서
 
 ## 설치
 
-### 1. 플러그인 clone 및 준비
+### 권장: npm 패키지
+
+패키지가 publish된 뒤에는 global opencode 설정 파일 `~/.config/opencode/opencode.json`에 다음처럼 추가합니다.
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@imwh0im/opencode-worktree-guard"]
+}
+```
+
+플러그인이 함께 포함된 `worktree-checkpoint` skill을 자동 등록합니다. 별도의 `skills.paths` 설정은 필요하지 않습니다.
+
+설정을 바꾼 뒤에는 opencode를 재시작해야 합니다. opencode는 설정, 플러그인, 스킬을 시작 시점에 로드합니다.
+
+### 로컬 개발
+
+이 저장소를 clone하고 build합니다.
 
 ```bash
 git clone https://github.com/imwh0im/opencode-worktree-guard.git
@@ -43,27 +60,18 @@ npm install
 npm run build
 ```
 
-### 2. opencode에 등록
-
-global opencode 설정 파일 `~/.config/opencode/opencode.json`에 plugin과 skill 경로를 추가합니다.
+그다음 opencode 설정에서 build된 plugin 파일을 참조합니다.
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["/absolute/path/to/opencode-worktree-guard/dist/index.js"],
-  "skills": {
-    "paths": ["/absolute/path/to/opencode-worktree-guard/skills"]
-  }
+  "plugin": ["/absolute/path/to/opencode-worktree-guard/dist/index.js"]
 }
 ```
 
-`/absolute/path/to/opencode-worktree-guard`는 이 저장소를 clone한 실제 경로로 바꿔주세요.
+`/absolute/path/to/opencode-worktree-guard`는 이 저장소를 clone한 실제 경로로 바꿔주세요. 설정을 바꾼 뒤에는 opencode를 재시작해야 합니다.
 
-### 3. opencode 재시작
-
-설정을 바꾼 뒤에는 opencode를 재시작해야 합니다. opencode는 설정, 플러그인, 스킬을 시작 시점에 로드합니다.
-
-### 4. 선택 사항: 더 강한 AGENTS 정책 추가
+### 선택 사항: 더 강한 AGENTS 정책 추가
 
 더 강한 프롬프트 레벨 정책을 원하면 `snippets/AGENTS.md` 내용을 global 또는 project `AGENTS.md`에 붙여넣으세요.
 

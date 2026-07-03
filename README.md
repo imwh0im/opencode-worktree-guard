@@ -34,7 +34,24 @@ README.ko.md             # Korean docs
 
 ## Installation
 
-### 1. Clone and prepare the plugin
+### Recommended: npm package
+
+After the package is published, add it to your global opencode config at `~/.config/opencode/opencode.json`:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@imwh0im/opencode-worktree-guard"]
+}
+```
+
+The plugin registers its bundled `worktree-checkpoint` skill automatically. You do not need to add a separate `skills.paths` entry.
+
+Restart opencode after changing config. opencode loads config, plugins, and skills at startup.
+
+### Local development
+
+Clone and build this repository:
 
 ```bash
 git clone https://github.com/imwh0im/opencode-worktree-guard.git
@@ -43,27 +60,18 @@ npm install
 npm run build
 ```
 
-### 2. Register it in opencode
-
-Add the plugin and skill path to your global opencode config at `~/.config/opencode/opencode.json`:
+Then reference the built plugin file from your opencode config:
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["/absolute/path/to/opencode-worktree-guard/dist/index.js"],
-  "skills": {
-    "paths": ["/absolute/path/to/opencode-worktree-guard/skills"]
-  }
+  "plugin": ["/absolute/path/to/opencode-worktree-guard/dist/index.js"]
 }
 ```
 
-Replace `/absolute/path/to/opencode-worktree-guard` with the directory where you cloned this repository.
+Replace `/absolute/path/to/opencode-worktree-guard` with the directory where you cloned this repository. Restart opencode after changing config.
 
-### 3. Restart opencode
-
-Restart opencode after changing config. opencode loads config, plugins, and skills at startup.
-
-### 4. Optional: add the stronger AGENTS policy
+### Optional: add the stronger AGENTS policy
 
 For a stronger prompt-level policy, copy `snippets/AGENTS.md` into your global or project `AGENTS.md`.
 
