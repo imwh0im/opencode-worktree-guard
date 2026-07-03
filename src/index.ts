@@ -1,7 +1,17 @@
 import type { Plugin } from "@opencode-ai/plugin"
+import { dirname, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
 
 import { classifyRequest } from "./classifier.js"
 import { createSessionState } from "./state.js"
+
+type SkillPathConfig = {
+  skills?: {
+    paths?: string[]
+  }
+}
+
+const BUNDLED_SKILLS_PATH = resolve(dirname(fileURLToPath(import.meta.url)), "..", "skills")
 
 const SYSTEM_INSTRUCTION = [
   "Worktree guard is active.",
@@ -14,6 +24,9 @@ export const WorktreeGuardPlugin = (async () => {
   const sessions = createSessionState()
 
   return {
+    config: async (cfg) => {
+      addBundledSkillPath(cfg as SkillPathConfig)
+    },
     "chat.message": async (input, output) => {
       const messageText = output.parts
         .map((part) => JSON.stringify(part))
@@ -28,5 +41,17 @@ export const WorktreeGuardPlugin = (async () => {
     },
   }
 }) satisfies Plugin
+
+export function addBundledSkillPath(
+  config: SkillPathConfig,
+  skillsPath = BUNDLED_SKILLS_PATH,
+): void {
+  config.skills ??= {}
+  config.skills.paths ??= []
+
+  if (!config.skills.paths.includes(skillsPath)) {
+    config.skills.paths.push(skillsPath)
+  }
+}
 
 export default WorktreeGuardPlugin
