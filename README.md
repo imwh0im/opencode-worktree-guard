@@ -1,5 +1,7 @@
 # opencode-worktree-guard
 
+English | [한국어](README.ko.md)
+
 An opencode plugin and skill bundle that reminds agents to ask before starting risky implementation work in the current checkout.
 
 The goal is not to ask before every command. The guard is meant to stay quiet for read-only work, diagnostics, tests, explanations, and obvious single-file edits. It only nudges the agent before broad edits, refactors, dependency/config/schema/infra changes, or work that may become a PR.
